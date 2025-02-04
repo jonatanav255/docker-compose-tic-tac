@@ -11,5 +11,17 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  backend:
+    env_file:
+      - ./.env.backend
+    build:
+      context: ${BACKEND_CONTEXT:-./backend}
+      dockerfile: Dockerfile
+    container_name: my-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
 volumes:
   pgdata:
