@@ -23,5 +23,15 @@ services:
     depends_on:
       - db
 
+  frontend:
+    build:
+      context: ${FRONTEND_CONTEXT:-./frontend}
+      dockerfile: Dockerfile
+    container_name: my-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
 volumes:
   pgdata:
